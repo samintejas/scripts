@@ -1,0 +1,29 @@
+#!/bin/sh
+
+category=$1
+bg="#0e0e0e"
+
+date=$(date +%Y_%b_%d_%H%M%S)
+
+getWallpaper() {
+	echo "Downloading wallpaper"
+	local size='1920x1080'
+	wget -O ~/repo/Wallpapers/$date.jpg https://source.unsplash.com/random/${size}?$category
+}
+
+setWallpaper() {
+	nitrogen --save --set-zoom-fill ~/repo/Wallpapers/$date.jpg
+}
+
+setWal() {
+	wal -c
+	wal -b $bg -i ~/repo/Wallpapers/$date.jpg
+}
+
+getWallpaper
+# Use this if u just want to set wallaper
+#setWallpaper &
+
+# Use this if u want to change wallpaper and colorsheme
+setWal
+echo "DONE !!"
