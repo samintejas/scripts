@@ -1,0 +1,12 @@
+#!/bin/sh
+
+DEFAULT_VALUES="25\n50\n75\n100"
+
+VALUE=$(echo -e $DEFAULT_VALUES | dmenu -i -p ' ' -fn 'Hack Nerd Font:size=10' -nb '#0e0e0e' -nf '#ffffff' -sb '#f2122c' -sf '#0e0e0e')
+
+ILLUM_VALUE=$(((1500*$VALUE)/100))
+
+if [ $ILLUM_VALUE -ge 10 ]
+then
+	brightnessctl set $ILLUM_VALUE
+fi
