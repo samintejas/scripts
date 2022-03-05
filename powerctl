@@ -1,0 +1,15 @@
+#!/bin/sh
+
+menu1="Shutdown\nReboot"
+
+option=$(echo -e $menu1 | dmenu -i -p ' ' -fn 'Hack Nerd Font:size=10' -nb '#0e0e0e' -nf '#ffffff' -sb '#f2122c' -sf '#0e0e0e')
+
+if [ $option == "Shutdown" ];
+then
+	shutdown now
+elif [ $option == "Reboot" ];
+then 
+	reboot
+else echo "Not a valid powerctl command"
+fi
+
