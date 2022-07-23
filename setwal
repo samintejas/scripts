@@ -7,7 +7,7 @@ date=$(date +%Y_%b_%d_%H%M%S)
 
 getWallpaper() {
 	echo "Downloading wallpaper"
-	local size='1920x1080'
+	local size='3840x2160'
 	wget -O ~/repo/Wallpapers/$date.jpg https://source.unsplash.com/random/${size}?$category
 }
 
