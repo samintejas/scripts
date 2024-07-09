@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Directory where images are located
+directory=$(pwd)
+
+if [ $# -eq 1 ] && [ "$1" = "." ]; then
+    random_background=$(ls "$directory"/*.{jpg,jpeg,png} 2>/dev/null | shuf -n 1)
+    if [ -z "$random_background" ]; then
+        echo "No JPG images found in $directory"
+        exit 1
+    fi
+elif [ $# -eq 1 ]; then
+    filename="$1"
+    if [ ! -f "$directory/$filename" ]; then
+        echo "File '$filename' not found in $directory"
+        exit 1
+    fi
+    random_background="$directory/$filename"
+else
+    echo "Usage: $("$0") [.] [filename]"
+    echo "   .          : Select a random image from the current directory"
+    echo "   filename   : Use the specified image file as the background"
+    exit 1
+fi
+
+# Assuming 'hyprctl' commands are correct for setting wallpaper
+# Uncomment and modify as needed based on your 'hyprctl' commands
+hyprctl hyprpaper unload all
+hyprctl hyprpaper preload "$random_background"
+hyprctl hyprpaper wallpaper "DP-3, $random_background"
+echo "Walpaper updated image used: $random_background"
