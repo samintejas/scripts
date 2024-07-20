@@ -2,7 +2,7 @@
 
 SESSION_NAME="sixdee-vpn"
 VPN_CONFIG="$HOME/.config/.vpn/samin.tejas__ssl_vpn_config.ovpn"
-OPTION=$(echo -e "Connect\nOpen\nClose" | rofi -dmenu -p "6D VPN")
+OPTION=$(echo -e "connect\nopen\nclose" | rofi -dmenu -p "󰘵")
 
 
 kill_vpn_session() {
@@ -16,21 +16,21 @@ is_session_active() {
 }
 
 case "$OPTION" in
-  "Connect")
+  "connect")
     if is_session_active; then
       echo "VPN session is already active."
     else
       tmux new-session -s $SESSION_NAME "sudo openvpn --config $VPN_CONFIG"
     fi
     ;;
-  "Open")
+  "open")
     if is_session_active; then
       tmux attach-session -t $SESSION_NAME
     else
       echo "VPN session is not active."
     fi
     ;;
-  "Close")
+  "close")
     if is_session_active; then
       kill_vpn_session
       echo "VPN session killed."
@@ -39,6 +39,6 @@ case "$OPTION" in
     fi
     ;;
   *)
-    echo "Invalid option selected."
+    echo "!!"
     ;;
 esac
