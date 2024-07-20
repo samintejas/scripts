@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "Connecting to sixdee"
-sudo openvpn --config /home/samin/.config/.vpn/samin.tejas__ssl_vpn_config.ovpn
