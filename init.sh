@@ -1,6 +1,6 @@
 
 echo "installing packages .."
-sudo pacman -S git base-devel exa mesa vscode spotify-launcher stow helix intellij-idea-community-edition waybar hyprland hyprsunset rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp
+sudo pacman -S git base-devel exa mesa vscode spotify-launcher stow helix intellij-idea-community-edition waybar hyprland hyprsunset rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh
 
 echo "applying configs .. "
 
@@ -33,7 +33,7 @@ echo "installing additional packages from aur .. "
 cd $HOME
 paru -S zen-browser
 paru -S ttf-jetbrains-mono-nerd
-
+paru -S mycli
 
 echo "next step 1 : download and install work git certificated"
 echo "next step 2 : add git credentials for personal and work"
