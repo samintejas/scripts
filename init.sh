@@ -1,6 +1,6 @@
 
 echo "installing packages .."
-sudo pacman -S git base-devel exa mesa vscode spotify-launcher stow helix intellij-idea-community-edition waybar hyprland hyprsunset rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh
+sudo pacman -S git base-devel exa mesa vscode spotify-launcher stow helix intellij-idea-community-edition waybar hyprland hyprsunset rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh cland cmake ninja wl-clipboard
 
 echo "applying configs .. "
 
