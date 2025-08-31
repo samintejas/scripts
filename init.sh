@@ -43,6 +43,8 @@ cd $HOME/tmp/
 paru -S zen-browser
 paru -S ttf-jetbrains-mono-nerd
 
+echo "enabling sddm : theme silent sddm"
+sudo systemctl enable sddm
 # echo "next step 1 : download and install work git certificated"
 # echo "next step 2 : add git credentials for personal and work"
 echo "next step 3 : setup grub"
