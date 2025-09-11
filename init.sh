@@ -1,7 +1,7 @@
 
 
 echo "installing packages .."
-sudo pacman -S reflector git base-devel exa mesa vscode spotify-launcher stow intellij-idea-community-edition waybar hyprland hyprsunset rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh wl-clipboard bluez bluez-utils
+sudo pacman -S reflector git base-devel exa mesa vscode spotify-launcher stow intellij-idea-community-edition waybar hyprland hyprsunset rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh wl-clipboard bluez bluez-utils hyprlock
 
 echo "updating mirrors"
 reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
