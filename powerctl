@@ -1,8 +1,9 @@
 #!/bin/sh
-menu1="Shutdown\nReboot"
-option=$(echo -e "$menu1" | rofi -dmenu -i -p " " -font "Hack Nerd Font 14" -theme-str 'window {background-color: #0e0e0e;} listview {background-color: #0e0e0e; lines: 2;} entry {background-color: #0e0e0e; color: #ffffff;} element {background-color: #0e0e0e; color: #ffffff;} element selected {background-color: #f2122c; color: #0e0e0e;}')
+menu1="Shutdown\nReboot\nLock"
+option=$(echo -e "$menu1" | rofi -dmenu -i -p " " -font "Hack Nerd Font 14" -theme-str 'window {background-color: #0e0e0e;} listview {background-color: #0e0e0e; lines: 3;} entry {background-color: #0e0e0e; color: #ffffff;} element {background-color: #0e0e0e; color: #ffffff;} element selected {background-color: #f70777; color: #0e0e0e;}')
 case "$option" in
 "Shutdown") shutdown now ;;
 "Reboot") reboot ;;
+"Lock") hyprlock ;;
 *) echo "Not a valid powerctl command" ;;
 esac
