@@ -1,7 +1,5 @@
-
-
 echo "installing packages .."
-sudo pacman -S reflector git base-devel exa mesa vscode spotify-launcher stow intellij-idea-community-edition waybar hyprland hyprsunset rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh wl-clipboard bluez bluez-utils hyprlock
+sudo pacman -S reflector git base-devel exa mesa spotify-launcher stow intellij-idea-community-edition waybar hyprland hyprsunset hyprlock rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh wl-clipboard bluez bluez-utils bind
 
 echo "updating mirrors"
 reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
@@ -12,17 +10,18 @@ sudo pacman -Syy
 echo "pulling configs .. "
 
 cd $HOME
-mkdir -p $HOME/tmp
+mkdir $HOME/repo
+mkdir $HOME/lib
 
-cd tmp
-mkdir -p repo
-cd repo
+echo "clonning public repo"
+cd $HOME/repo/zen/
 git clone https://github.com/samintejas/dots.git
-cd dots
+git clone https://github.com/samintejas/wallpapers.git
+git clone https://github.com/samintejas/scripts.git
+cd $HOME/repo/zen/dots
 
 echo "configuring shell"
 stow -t ~ zsh
-
 sudo chsh -s /bin/zsh
 sudo chsh -s /usr/bin/zsh $USER
 
@@ -45,8 +44,4 @@ paru -S ttf-jetbrains-mono-nerd
 
 echo "enabling sddm : theme silent sddm"
 sudo systemctl enable sddm
-# echo "next step 1 : download and install work git certificated"
-# echo "next step 2 : add git credentials for personal and work"
-echo "next step 3 : setup grub"
-echo "next step 4 : setup duelboot optimizations if any"
 
