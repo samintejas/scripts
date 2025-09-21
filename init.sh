@@ -1,47 +1,66 @@
-echo "installing packages .."
-sudo pacman -S reflector git base-devel exa mesa spotify-launcher stow intellij-idea-community-edition waybar hyprland hyprsunset hyprlock rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf swaync sddm bat swww grim slurp unzip uwsm docker docker-compose btop openssh wl-clipboard bluez bluez-utils bind
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "updating mirrors"
-reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+GREEN="\e[32m"
+YELLOW="\e[33m"
+RESET="\e[0m"
 
-echo "resyncing repo"
-sudo pacman -Syy
+log() { echo -e "${GREEN}==>${RESET} $1"; }
+warn() { echo -e "${YELLOW}==>${RESET} $1"; }
 
-echo "pulling configs .. "
+log "Updating package databases..."
+sudo pacman -Syyu --noconfirm
 
-cd $HOME
-mkdir $HOME/repo
-mkdir $HOME/lib
+log "Installing base packages..."
+sudo pacman -S --needed --noconfirm \
+    reflector git base-devel exa mesa spotify-launcher stow \
+    intellij-idea-community-edition waybar hyprland hyprsunset hyprlock \
+    rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent \
+    qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf \
+    swaync sddm bat swww grim slurp unzip uwsm docker docker-compose \
+    btop openssh wl-clipboard bluez bluez-utils bind
 
-echo "clonning public repo"
-cd $HOME/repo/zen/
-git clone https://github.com/samintejas/dots.git
-git clone https://github.com/samintejas/wallpapers.git
-git clone https://github.com/samintejas/scripts.git
-cd $HOME/repo/zen/dots
+log "Updating mirrors with reflector..."
+sudo reflector --latest 20 --protocol https --sort rate \
+    --save /etc/pacman.d/mirrorlist
 
-echo "configuring shell"
-stow -t ~ zsh
-sudo chsh -s /bin/zsh
-sudo chsh -s /usr/bin/zsh $USER
+log "Setting up directories..."
+mkdir -p "$HOME/repo/zen" "$HOME/lib" "$HOME/tmp"
 
-echo "creating config symlink"
-mkdir -p ~./.config
-stow -t ~/.config/ config
+log "Cloning public repos..."
+cd "$HOME/repo/zen"
+[ ! -d "dots" ] && git clone https://github.com/samintejas/dots.git
+[ ! -d "wallpapers" ] && git clone https://github.com/samintejas/wallpapers.git
+[ ! -d "scripts" ] && git clone https://github.com/samintejas/scripts.git
 
-echo "installing paru .. "
+log "Configuring dotfiles with stow..."
+cd "$HOME/repo/zen/dots"
+stow -t "$HOME" zsh || warn "zsh stow failed"
+mkdir -p "$HOME/.config"
+stow -t "$HOME/.config" config || warn "config stow failed"
 
-cd $HOME/tmp/
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
+warn "Skipping automatic root shell change. Run 'chsh -s /bin/zsh' manually if needed."
+chsh -s /bin/zsh $USER
 
+log "Copying scipts"
+cp $HOME/repo/zen/scripts/powerctl /usr/bin/
+cp $HOME/repo/zen/scripts/sshot /usr/bin/
 
-echo "installing additional packages from aur .. "
-cd $HOME/tmp/
-paru -S zen-browser
-paru -S ttf-jetbrains-mono-nerd
+if ! command -v paru &>/dev/null; then
+    log "Installing paru .."
+    cd "$HOME/tmp"
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si --noconfirm
+else
+    log "paru already installed."
+fi
 
-echo "enabling sddm : theme silent sddm"
-sudo systemctl enable sddm
+log "Installing AUR packages..."
+paru -S --needed --noconfirm \
+    zen-browser ttf-jetbrains-mono-nerd visual-studio-code-bin
 
+log "Enabling SDDM..."
+sudo systemctl enable sddm.service
+
+log "Done!"
