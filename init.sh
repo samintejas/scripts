@@ -18,11 +18,10 @@ sudo pacman -S --needed --noconfirm \
     rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent \
     qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf \
     swaync sddm bat swww grim slurp unzip uwsm docker docker-compose \
-    btop openssh wl-clipboard bluez bluez-utils bind
+    btop openssh wl-clipboard bluez bluez-utils bind nvim go nvm
 
 log "Updating mirrors with reflector..."
-sudo reflector --latest 20 --protocol https --sort rate \
-    --save /etc/pacman.d/mirrorlist
+sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 log "Setting up directories..."
 mkdir -p "$HOME/repo/zen" "$HOME/lib" "$HOME/tmp"
@@ -43,8 +42,8 @@ warn "Skipping automatic root shell change. Run 'chsh -s /bin/zsh' manually if n
 chsh -s /bin/zsh $USER
 
 log "Copying scipts"
-cp $HOME/repo/zen/scripts/powerctl /usr/bin/
-cp $HOME/repo/zen/scripts/sshot /usr/bin/
+sudo cp $HOME/repo/zen/scripts/powerctl /usr/bin/
+sudo cp $HOME/repo/zen/scripts/sshot /usr/bin/
 
 if ! command -v paru &>/dev/null; then
     log "Installing paru .."
@@ -57,8 +56,7 @@ else
 fi
 
 log "Installing AUR packages..."
-paru -S --needed --noconfirm \
-    zen-browser ttf-jetbrains-mono-nerd visual-studio-code-bin
+paru -S --needed --noconfirm zen-browser ttf-jetbrains-mono-nerd visual-studio-code-bin
 
 log "Enabling SDDM..."
 sudo systemctl enable sddm.service
