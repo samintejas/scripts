@@ -13,7 +13,7 @@ sudo pacman -Syyu --noconfirm
 
 log "Installing base packages..."
 sudo pacman -S --needed --noconfirm \
-    reflector git base-devel exa mesa spotify-launcher stow \
+    reflector git delta base-devel eza mesa spotify-launcher stow \
     intellij-idea-community-edition waybar hyprland hyprsunset hyprlock \
     rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent \
     qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf \
