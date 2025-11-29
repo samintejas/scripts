@@ -13,11 +13,11 @@ sudo pacman -Syyu --noconfirm
 
 log "Installing base packages..."
 sudo pacman -S --needed --noconfirm \
-    reflector git delta base-devel eza mesa spotify-launcher stow \
+    reflector git delta tealdeer base-devel eza mesa spotify-launcher stow \
     intellij-idea-community-edition waybar hyprland hyprsunset hyprlock \
     rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent \
     qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf \
-    swaync sddm bat swww grim slurp unzip uwsm docker docker-compose \
+    swaync greetd greetd-tuigreet bat swww grim slurp unzip uwsm docker docker-compose \
     btop openssh wl-clipboard bluez bluez-utils bind nvim go nvm
 
 log "Updating mirrors with reflector..."
@@ -58,7 +58,7 @@ fi
 log "Installing AUR packages..."
 paru -S --needed --noconfirm zen-browser ttf-jetbrains-mono-nerd visual-studio-code-bin
 
-log "Enabling SDDM..."
-sudo systemctl enable sddm.service
+log "Enabling greetd..."
+sudo systemctl enable greetd.service
 
 log "Done!"
