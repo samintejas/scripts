@@ -1,11 +1,9 @@
 #!/bin/zsh
-
 screenshot_dir="$HOME/tmp/sshots"
-
 if [[ ! -d "$screenshot_dir" ]]; then
 	mkdir -p "$screenshot_dir"
 fi
-
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+screenshot_path="$screenshot_dir/screenshot_$timestamp.png"
 
-grim -g "$(slurp)" $screenshot_dir/screenshot_$timestamp.png
+grim -g "$(slurp)" - | tee "$screenshot_path" | wl-copy
