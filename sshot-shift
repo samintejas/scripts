@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+screenshot_dir="$HOME/tmp/sshots"
+mkdir -p "$screenshot_dir"
+
+timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+screenshot_path="$screenshot_dir/screenshot_$timestamp.png"
+
+grim -g "$(slurp)" "$screenshot_path" && swappy -f "$screenshot_path"

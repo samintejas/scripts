@@ -17,8 +17,9 @@ sudo pacman -S --needed --noconfirm \
     intellij-idea-community-edition waybar hyprland hyprsunset hyprlock \
     rofi-wayland ghostty xdg-desktop-portal-hyprland hyprpolkitagent \
     qt5-wayland qt6-wayland imv nwg-look yazi starship fd zsh fzf \
-    swaync greetd greetd-tuigreet bat swww grim slurp unzip uwsm docker docker-compose \
-    btop openssh wl-clipboard bluez bluez-utils bind nvim go nvm
+    swaync greetd greetd-tuigreet bat swww grim slurp swappy unzip uwsm docker docker-compose \
+    btop openssh wl-clipboard bluez bluez-utils bind nvim go nvm ffmpegthumbnailer ueberzugpp poppler ripgrep \
+    gnome-keyring libsecret seahorse
 
 log "Updating mirrors with reflector..."
 sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
@@ -56,9 +57,13 @@ else
 fi
 
 log "Installing AUR packages..."
-paru -S --needed --noconfirm zen-browser ttf-jetbrains-mono-nerd visual-studio-code-bin
+paru -S --needed --noconfirm zen-browser ttf-jetbrains-mono-nerd visual-studio-code-bin ruff
 
 log "Enabling greetd..."
 sudo systemctl enable greetd.service
+
+log "Updating go formatters"
+go install mvdan.cc/gofumpt@latest
+go install golang.org/x/tools/cmd/goimports@latest
 
 log "Done!"
