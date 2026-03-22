@@ -94,7 +94,7 @@ log "Changing shell to zsh..."
 chsh -s /bin/zsh "$USER"
 
 log "Copying scripts..."
-for script in powerctl sshot sshot-shift clip_to_list; do
+for script in powerctl sshot sshot-shift; do
     sudo cp "$HOME/repo/zen/scripts/$script" /usr/bin/
 done
 
